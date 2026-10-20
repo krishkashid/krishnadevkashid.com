@@ -7,8 +7,8 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://krishnadevkashid.com',
   trailingSlash: 'never',
-  build: { format: 'file' },
+  build: { format: 'file', inlineStylesheets: 'always' },
   integrations: [mdx(), sitemap()],
   vite: { plugins: [tailwindcss()] },
-  prefetch: { prefetchAll: true, defaultStrategy: 'viewport' },
+  prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
 });
