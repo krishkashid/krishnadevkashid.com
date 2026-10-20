@@ -36,6 +36,41 @@
           {
             "minScore": 1
           }
+        ],
+        "first-contentful-paint": [
+          "warn",
+          {
+            "maxNumericValue": 1,
+            "aggregationMethod": "median-run"
+          }
+        ],
+        "largest-contentful-paint": [
+          "warn",
+          {
+            "maxNumericValue": 1,
+            "aggregationMethod": "median-run"
+          }
+        ],
+        "speed-index": [
+          "warn",
+          {
+            "maxNumericValue": 1,
+            "aggregationMethod": "median-run"
+          }
+        ],
+        "total-blocking-time": [
+          "warn",
+          {
+            "maxNumericValue": 1,
+            "aggregationMethod": "median-run"
+          }
+        ],
+        "cumulative-layout-shift": [
+          "warn",
+          {
+            "maxNumericValue": 0,
+            "aggregationMethod": "median-run"
+          }
         ]
       }
     }
