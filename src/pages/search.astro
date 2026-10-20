@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Search" description="Search essays, notes and weekly reads by Krishnadev Kashid.">
+  <h1 class="h1">Search</h1>
+  <div id="search" style="margin-top:1.5rem"></div>
+  <noscript><p class="muted">Search needs JavaScript. Browse <a href="/essays">essays</a>, <a href="/notes">notes</a> or <a href="/reads">reads</a> instead.</p></noscript>
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+  <script is:inline src="/pagefind/pagefind-ui.js"></script>
+  <script is:inline>
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.PagefindUI) new PagefindUI({ element: '#search', showImages: false, resetStyles: false });
+    });
+  </script>
+</Base>

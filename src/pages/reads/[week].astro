@@ -1,0 +1,42 @@
+---
+import Base from '../../layouts/Base.astro';
+import { PILLARS, SITE } from '../../config';
+import { allReads, fmtDate } from '../../lib/content';
+export async function getStaticPaths() {
+  return (await allReads()).map((r) => ({ params: { week: r.data.week }, props: { read: r } }));
+}
+const { read } = Astro.props;
+const { data } = read;
+const path = `/reads/${data.week}`;
+const jsonLd = [
+  {
+    '@type': 'CollectionPage',
+    '@id': `${SITE.url}${path}#page`,
+    name: data.title,
+    description: data.description,
+    datePublished: data.pubDate.toISOString(),
+    author: { '@id': `${SITE.url}/#person` },
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: data.items.map((it, i) => ({ '@type': 'ListItem', position: i + 1, url: it.url, name: it.title })),
+    },
+  },
+];
+---
+
+<Base title={data.title} description={data.description} path={path} type="article" pubDate={data.pubDate} jsonLd={jsonLd}>
+  <article data-pagefind-body>
+    <p class="pill" style="margin:0 0 .75rem">Weekly reads · {data.week}</p>
+    <h1 class="h1">{data.title}</h1>
+    <p class="ui muted" style="margin:.75rem 0 0"><time datetime={data.pubDate.toISOString()}>{fmtDate(data.pubDate)}</time></p>
+    <ol style="padding:0;list-style:none;margin-top:2rem">
+      {data.items.map((it) => (
+        <li class="entry">
+          <p class="pill" style="margin:0 0 .25rem">{PILLARS[it.pillar].title} · {it.source}{it.author && ` · ${it.author}`}</p>
+          <h3><a href={it.url} rel="noopener">{it.title}</a></h3>
+          <p style="color:var(--fg)">{it.commentary}</p>
+        </li>
+      ))}
+    </ol>
+  </article>
+</Base>

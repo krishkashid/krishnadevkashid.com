@@ -1,0 +1,23 @@
+---
+import Base from '../../layouts/Base.astro';
+import Entry from '../../components/Entry.astro';
+import { PILLARS, PILLAR_KEYS } from '../../config';
+import { allEssays, allNotes } from '../../lib/content';
+export function getStaticPaths() {
+  return PILLAR_KEYS.map((pillar) => ({ params: { pillar } }));
+}
+const { pillar } = Astro.params as { pillar: keyof typeof PILLARS };
+const info = PILLARS[pillar];
+const posts = [...(await allEssays()), ...(await allNotes())]
+  .filter((p) => p.data.pillar === pillar)
+  .sort((a, b) => +b.data.pubDate - +a.data.pubDate);
+---
+
+<Base title={info.title} description={info.blurb}>
+  <h1 class="h1">{info.title}</h1>
+  <p class="muted" style="margin-top:.5rem">{info.blurb}</p>
+  <div style="margin-top:1.5rem">
+    {posts.length === 0 && <p class="muted">Writing on this topic is coming.</p>}
+    {posts.map((p) => <Entry href={`/${p.collection}/${p.id}`} title={p.data.title} description={p.data.description} date={p.data.pubDate} />)}
+  </div>
+</Base>

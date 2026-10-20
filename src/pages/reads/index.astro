@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import Entry from '../../components/Entry.astro';
+import { allReads } from '../../lib/content';
+const reads = await allReads();
+---
+
+<Base title="Weekly reads" description="A weekly digest of the best things I read on AI, Indian financial services, fintech and startups, with my commentary.">
+  <h1 class="h1">Weekly reads</h1>
+  <p class="muted" style="margin-top:.5rem">Five to eight links a week, each with a line on why it matters.</p>
+  <div style="margin-top:1.5rem">
+    {reads.length === 0 && <p class="muted">The first digest is on its way.</p>}
+    {reads.map((r) => <Entry href={`/reads/${r.data.week}`} title={r.data.title} description={r.data.description} date={r.data.pubDate} />)}
+  </div>
+</Base>

@@ -1,0 +1,22 @@
+---
+import { SITE } from '../config';
+import ThemeToggle from './ThemeToggle.astro';
+const path = Astro.url.pathname;
+const links = [
+  ['/essays', 'Essays'],
+  ['/notes', 'Notes'],
+  ['/reads', 'Reads'],
+  ['/about', 'About'],
+  ['/search', 'Search'],
+];
+---
+
+<header class="col ui" style="padding-block:1.5rem 1rem;display:flex;flex-wrap:wrap;gap:.75rem 1.25rem;align-items:center;justify-content:space-between">
+  <a href="/" style="color:var(--fg);font-weight:700;text-decoration:none;letter-spacing:-.01em">{SITE.name}</a>
+  <nav aria-label="Primary" style="display:flex;flex-wrap:wrap;gap:.25rem 1rem;align-items:center">
+    {links.map(([href, label]) => (
+      <a href={href} aria-current={path.startsWith(href) ? 'page' : undefined} style={`text-decoration:none;color:${path.startsWith(href) ? 'var(--fg)' : 'var(--muted)'}`}>{label}</a>
+    ))}
+    <ThemeToggle />
+  </nav>
+</header>

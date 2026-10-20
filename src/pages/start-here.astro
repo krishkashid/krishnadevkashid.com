@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import Entry from '../components/Entry.astro';
+import { PILLARS } from '../config';
+import { allEssays } from '../lib/content';
+const essays = (await allEssays()).slice(0, 5);
+---
+
+<Base title="Start here" description="New to the site? Here is what I write about, where to begin, and how to follow along.">
+  <h1 class="h1">Start here</h1>
+  <div class="prose" style="margin-top:1.5rem">
+    <p>I write about four things. Pick the one that matches why you're here.</p>
+    <ul>
+      {Object.entries(PILLARS).map(([k, v]) => <li><a href={`/topics/${k}`}><strong>{v.title}</strong></a>. {v.blurb}</li>)}
+    </ul>
+  </div>
+  {essays.length > 0 && (
+    <section style="margin-top:2rem" aria-labelledby="begin">
+      <h2 id="begin" class="pill" style="margin:0">Good places to begin</h2>
+      {essays.map((p) => <Entry href={`/essays/${p.id}`} title={p.data.title} description={p.data.description} date={p.data.pubDate} pillar={p.data.pillar} />)}
+    </section>
+  )}
+  <p class="ui" style="margin-top:2rem">Follow along by <a href="/rss.xml">RSS</a> or <a href="https://in.linkedin.com/in/krishnadevkashid" rel="me noopener">LinkedIn</a>.</p>
+</Base>

@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import Entry from '../components/Entry.astro';
+import { PILLARS, SITE } from '../config';
+import { allEssays, allNotes, allReads } from '../lib/content';
+const essays = (await allEssays()).slice(0, 4);
+const notes = (await allNotes()).slice(0, 4);
+const reads = (await allReads()).slice(0, 1);
+---
+
+<Base title={SITE.name} description={SITE.description} path="/">
+  <section style="padding-block:1rem 2rem">
+    <h1 class="h1" style="font-size:clamp(2rem,6vw,2.9rem)">{SITE.tagline}.</h1>
+    <p style="margin:1.25rem 0 0;font-size:1.15rem">
+      I'm Krishnadev Kashid. I build AI and analytics functions in Indian financial services, and write about what works, what stalls and what to do about it.
+    </p>
+    <p class="ui" style="margin:1.25rem 0 0;display:flex;flex-wrap:wrap;gap:.5rem 1.25rem">
+      <a href="/start-here">Start here →</a>
+      <a href="/about">About me</a>
+      <a href="/rss.xml">Subscribe by RSS</a>
+    </p>
+  </section>
+
+  <section aria-labelledby="topics">
+    <h2 id="topics" class="pill" style="margin:0 0 .5rem">What I write about</h2>
+    <ul class="ui" style="list-style:none;padding:0;margin:0;display:grid;gap:.5rem 1.5rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+      {Object.entries(PILLARS).map(([k, v]) => <li><a href={`/topics/${k}`} style="font-weight:600">{v.title}</a><br /><span class="muted">{v.blurb}</span></li>)}
+    </ul>
+  </section>
+
+  <section aria-labelledby="essays" style="margin-top:2.5rem">
+    <h2 id="essays" class="pill" style="margin:0 0 .25rem">Latest essays</h2>
+    {essays.length === 0 && <p class="muted">The first essays are being prepared.</p>}
+    {essays.map((p) => <Entry href={`/essays/${p.id}`} title={p.data.title} description={p.data.description} date={p.data.pubDate} pillar={p.data.pillar} />)}
+    {essays.length > 0 && <p class="ui"><a href="/essays">All essays →</a></p>}
+  </section>
+
+  {notes.length > 0 && (
+    <section aria-labelledby="notes" style="margin-top:2.5rem">
+      <h2 id="notes" class="pill" style="margin:0 0 .25rem">Recent notes</h2>
+      {notes.map((p) => <Entry href={`/notes/${p.id}`} title={p.data.title} description={p.data.description} date={p.data.pubDate} pillar={p.data.pillar} />)}
+      <p class="ui"><a href="/notes">All notes →</a></p>
+    </section>
+  )}
+
+  {reads.length > 0 && (
+    <section aria-labelledby="reads" style="margin-top:2.5rem">
+      <h2 id="reads" class="pill" style="margin:0 0 .25rem">This week's reads</h2>
+      {reads.map((r) => <Entry href={`/reads/${r.data.week}`} title={r.data.title} description={r.data.description} date={r.data.pubDate} />)}
+    </section>
+  )}
+</Base>

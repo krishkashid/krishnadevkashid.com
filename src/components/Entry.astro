@@ -1,0 +1,14 @@
+---
+import { PILLARS, type PillarKey } from '../config';
+import { fmtDate } from '../lib/content';
+interface Props { href: string; title: string; description: string; date: Date; pillar?: PillarKey }
+const { href, title, description, date, pillar } = Astro.props;
+---
+
+<article class="entry">
+  <p class="pill" style="margin:0 0 .25rem">
+    <time datetime={date.toISOString()}>{fmtDate(date)}</time>{pillar && <> · {PILLARS[pillar].title}</>}
+  </p>
+  <h3><a href={href}>{title}</a></h3>
+  <p>{description}</p>
+</article>

@@ -1,0 +1,14 @@
+---
+import { SITE } from '../config';
+---
+
+<footer class="col ui muted" style="padding-block:2rem 3rem;margin-top:auto">
+  <hr class="rule" style="margin-top:0" />
+  <p style="margin:0 0 .5rem">{SITE.disclaimer}</p>
+  <p style="margin:0;display:flex;flex-wrap:wrap;gap:.25rem 1rem">
+    <a href="/colophon">Colophon</a>
+    <a href="/rss.xml">RSS</a>
+    <a href="/start-here">Start here</a>
+    <a href={SITE.linkedin} rel="me noopener">LinkedIn</a>
+  </p>
+</footer>

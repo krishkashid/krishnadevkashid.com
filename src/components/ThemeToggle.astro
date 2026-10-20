@@ -1,0 +1,11 @@
+<button id="theme-toggle" class="ui muted" type="button" aria-label="Toggle dark mode" style="background:none;border:0;cursor:pointer;padding:.25rem .5rem">
+  <span aria-hidden="true">◐</span>
+</button>
+<script is:inline>
+  document.getElementById('theme-toggle')?.addEventListener('click', () => {
+    const r = document.documentElement;
+    const dark = r.dataset.theme ? r.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    r.dataset.theme = dark ? 'light' : 'dark';
+    try { localStorage.setItem('theme', r.dataset.theme); } catch {}
+  });
+</script>

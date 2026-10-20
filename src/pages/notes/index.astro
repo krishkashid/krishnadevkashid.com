@@ -1,0 +1,14 @@
+---
+import Base from '../../layouts/Base.astro';
+import Entry from '../../components/Entry.astro';
+import { allNotes } from '../../lib/content';
+const posts = await allNotes();
+---
+
+<Base title="Notes" description="Notes by Krishnadev Kashid on AI in Indian financial services, fintech and building AI teams.">
+  <h1 class="h1">Notes</h1>
+  <div style="margin-top:1.5rem">
+    {posts.length === 0 && <p class="muted">Nothing here yet.</p>}
+    {posts.map((p) => <Entry href={`/notes/${p.id}`} title={p.data.title} description={p.data.description} date={p.data.pubDate} pillar={p.data.pillar} />)}
+  </div>
+</Base>

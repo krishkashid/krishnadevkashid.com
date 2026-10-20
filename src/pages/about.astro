@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../config';
+---
+
+<Base title="About" description="Krishnadev Kashid builds AI, ML and analytics functions in Indian financial services and writes about making AI work in banks, insurers and asset managers.">
+  <h1 class="h1">About</h1>
+  <div class="prose" style="margin-top:1.5rem">
+    <p>I'm Krishnadev Kashid, based in Mumbai. You may also see my name written as Krishna Kashid.</p>
+    <p>
+      I have worked on data, technology and AI throughout my career, with one goal: using them to create business value. Across several roles I have built data science, analytics and AI teams from the ground up, feeding enterprise intelligence. Today that work is in Indian financial services, where models meet operations, including fraud analytics and the governance that lets AI go into production in a regulated business.
+    </p>
+    <p>
+      I have spoken on panels about analytics and AI in fraud prevention, and I hire early-career people who want to work in applied AI.
+    </p>
+    <p>
+      I read widely, and I am drawn to how startups scale and to experimentation. My habit is to form several hypotheses on a question, then try to validate or reject the fundamental thesis behind each. I try to cut noise and boost signal.
+    </p>
+    <h2>What this site is</h2>
+    <p>
+      A place to think in public about AI transformation in banking, financial services and insurance, Indian fintech, and building AI teams. Essays are long and sourced, notes are short, and the weekly reads are what I found worth your time that week.
+    </p>
+    <h2>How I write</h2>
+    <p>
+      Research and first drafts are AI-assisted. Every piece is read, edited and approved by me before it goes live. <a href="/colophon">The colophon explains how.</a>
+    </p>
+    <h2>Find me</h2>
+    <p><a href={SITE.linkedin} rel="me noopener">LinkedIn</a> · <a href="/rss.xml">RSS</a></p>
+    <p class="muted ui">{SITE.disclaimer}</p>
+  </div>
+</Base>

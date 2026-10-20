@@ -1,0 +1,104 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Entry from './Entry.astro';
+import { PILLARS, SITE } from '../config';
+import { allEssays, allNotes, fmtDate, minutes, type Post } from '../lib/content';
+
+interface Props { post: Post; kind: 'essays' | 'notes' }
+const { post, kind } = Astro.props;
+const { Content, headings } = await render(post);
+const { data } = post;
+const path = `/${kind}/${post.id}`;
+const toc = headings.filter((h) => h.depth === 2);
+
+const pool = [...(await allEssays()), ...(await allNotes())].filter((p) => p.id !== post.id || p.collection !== post.collection);
+const related = pool
+  .map((p) => ({ p, score: (p.data.pillar === data.pillar ? 2 : 0) + p.data.tags.filter((t) => data.tags.includes(t)).length }))
+  .filter((x) => x.score > 0)
+  .sort((a, b) => b.score - a.score || +b.p.data.pubDate - +a.p.data.pubDate)
+  .slice(0, 3)
+  .map((x) => x.p);
+
+const jsonLd = [
+  {
+    '@type': 'BlogPosting',
+    '@id': `${SITE.url}${path}#article`,
+    headline: data.title,
+    description: data.description,
+    datePublished: data.pubDate.toISOString(),
+    dateModified: (data.updatedDate ?? data.pubDate).toISOString(),
+    author: { '@id': `${SITE.url}/#person` },
+    publisher: { '@id': `${SITE.url}/#person` },
+    mainEntityOfPage: `${SITE.url}${path}`,
+    image: `${SITE.url}/og/${kind}/${post.id}.png`,
+    keywords: data.tags.join(', '),
+    articleSection: PILLARS[data.pillar].title,
+    inLanguage: 'en-IN',
+    isPartOf: { '@id': `${SITE.url}/#website` },
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+      { '@type': 'ListItem', position: 2, name: kind === 'essays' ? 'Essays' : 'Notes', item: `${SITE.url}/${kind}` },
+      { '@type': 'ListItem', position: 3, name: data.title, item: `${SITE.url}${path}` },
+    ],
+  },
+];
+---
+
+<Base
+  title={data.title}
+  description={data.description}
+  path={path}
+  type="article"
+  image={`/og/${kind}/${post.id}.png`}
+  pubDate={data.pubDate}
+  updatedDate={data.updatedDate}
+  jsonLd={jsonLd}
+>
+  <article data-pagefind-body>
+    <p class="pill" style="margin:0 0 .75rem">
+      <a href={`/topics/${data.pillar}`} style="color:inherit">{PILLARS[data.pillar].title}</a>
+    </p>
+    <h1 class="h1">{data.title}</h1>
+    <p class="ui muted" style="margin:.75rem 0 0">
+      <time datetime={data.pubDate.toISOString()}>{fmtDate(data.pubDate)}</time>{' '}
+      · {minutes(post.body)} min read
+      {data.updatedDate && <> · Updated <time datetime={data.updatedDate.toISOString()}>{fmtDate(data.updatedDate)}</time></>}
+    </p>
+    {kind === 'essays' && toc.length > 2 && (
+      <nav class="ui" aria-label="Contents" style="margin:1.5rem 0;padding:1rem 1.25rem;border:1px solid var(--rule);border-radius:6px">
+        <strong>In this essay</strong>
+        <ol style="margin:.5rem 0 0;padding-left:1.1rem">
+          {toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}
+        </ol>
+      </nav>
+    )}
+    <div class="prose" style="margin-top:2rem"><Content /></div>
+
+    {data.sources.length > 0 && (
+      <section aria-labelledby="sources" style="margin-top:2.5rem">
+        <h2 id="sources" class="ui" style="font-weight:700;font-size:1rem">Sources</h2>
+        <ul class="ui muted" style="padding-left:1.1rem;line-height:1.6">
+          {data.sources.map((s) => <li><a href={s.url} rel="noopener">{s.title}</a>, {s.publisher}</li>)}
+        </ul>
+      </section>
+    )}
+    {data.aiAssisted && (
+      <p class="ui muted" style="margin-top:1.5rem">
+        Research and first drafts are AI-assisted; every word is reviewed and approved by me before it is published. <a href="/colophon">How this site is made</a>.
+      </p>
+    )}
+  </article>
+
+  {related.length > 0 && (
+    <section aria-labelledby="related" style="margin-top:3rem">
+      <h2 id="related" class="ui" style="font-weight:700;font-size:1rem">Keep reading</h2>
+      {related.map((p) => (
+        <Entry href={`/${p.collection}/${p.id}`} title={p.data.title} description={p.data.description} date={p.data.pubDate} pillar={p.data.pillar} />
+      ))}
+    </section>
+  )}
+</Base>
