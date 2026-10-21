@@ -8,7 +8,14 @@ updates:
     groups:
       all:
         patterns: ["*"]
+    ignore:
+      # astro check needs TypeScript 7.1+ with @astrojs/ts-content-mapper; revisit when that is stable
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: monthly
+    groups:
+      actions:
+        patterns: ["*"]
