@@ -31,13 +31,11 @@ Most AI programmes in financial institutions stall at pilot because use cases ar
 
 ## Why do AI pilots in financial institutions stall?
 
-I do not have a published stall rate for Indian financial institutions that I would stand behind, so I will not quote one. The mechanism is easier to defend than a statistic, and the public evidence points the same way.
+I have no published stall rate for Indian financial institutions that I would stand behind, so I will not quote one. The mechanism is easier to defend, and the public evidence points the same way.
 
-A pilot usually runs on a curated extract, with a small group of users and a forgiving definition of "works". Production has none of those. In the RBI's FREE-AI report, entities named the barriers to wider AI adoption: the talent gap, implementation cost, [lack of high-quality data for model training](https://www.rbi.org.in/Scripts/PublicationReportDetails.aspx?ID=1306), limited compute and legal uncertainty. They also said AI applications are "not plug-and-play". Many found it hard to get domain-specific, structured data out of legacy systems.
+A pilot usually runs on a curated extract, with a small group of users and a forgiving definition of "works". Production has none of those. In the RBI's FREE-AI report, entities named the barriers to wider AI adoption: the talent gap, implementation cost, [lack of high-quality data for model training](https://www.rbi.org.in/Scripts/PublicationReportDetails.aspx?ID=1306), limited compute, legal uncertainty, and difficulty getting structured, domain-specific data out of legacy systems. They said AI applications are "not plug-and-play". The same report records reluctance to explore customer-facing financial use cases, over data sensitivity, explainability and bias.
 
-On the sensitivity side, the same report notes that most GenAI use cases were still experimental and limited in scope. Entities were reluctant to explore customer-facing financial use cases because of concerns about data sensitivity, explainability and bias.
-
-The Bank of England and FCA's 2024 survey of UK firms points the same way. Of the top five perceived current risks, [four were data-related](https://www.bankofengland.co.uk/report/2024/artificial-intelligence-in-uk-financial-services-2024), and data protection and privacy was the largest perceived regulatory constraint. The UK is a different regime, so read it as corroboration of a pattern, not a measure of India.
+The Bank of England and FCA's 2024 UK survey points the same way: four of the top five perceived risks were [data-related](https://www.bankofengland.co.uk/report/2024/artificial-intelligence-in-uk-financial-services-2024), and data protection and privacy was the largest perceived regulatory constraint. Different regime, so read it as corroboration, not a measure of India.
 
 None of this is a surprise after the pilot. It was knowable before it. That is the claim of this essay.
 
@@ -54,7 +52,7 @@ Put every candidate use case on two axes. **Value** is what the business gains i
 
 **Fix the data first (high value, low readiness).** This is the pilot trap, and where most stalls begin. The demo works on a sample, and the value case is real, so it keeps getting funded. On Monday, fund the data work as the project and stop calling it a prerequisite.
 
-**Cheap wins (low value, high readiness).** Do these if CLAS shows they are cheap to run. Do not let them become the programme.
+**Cheap wins (low value, high readiness).** Do these if CLAS shows they are cheap to run, but do not let them become the programme.
 
 **Park (low value, low readiness).** Say no in writing, so it does not return as a pilot next quarter.
 
@@ -62,47 +60,50 @@ Put every candidate use case on two axes. **Value** is what the business gains i
 
 The placements below are my judgement, not findings of the sources.
 
-- **Support, sales and cybersecurity tooling.** In the RBI's survey of 612 supervised entities, 127 were using or developing AI. Across 583 applications in production or development, the most common were customer support (15.6%), credit underwriting (13.7%), sales and marketing (11.8%) and cybersecurity (10.6%). The report says these functions typically involve lower risk, structured flows and easier implementation. That reads as high readiness, and it is a plausible reason they are common.
-- **Thin-file credit assessment.** The report sees AI helping assess creditworthiness from non-traditional data for "thin-file" borrowers. Entities also cited sparse data as a bottleneck. High value, historically low readiness.
-- **Customer-facing GenAI.** Large potential, but the report records reluctance over data sensitivity. Value is high and readiness, including the security side, is unresolved.
+- **Support, sales and cybersecurity tooling.** In the RBI's survey of 612 supervised entities, 127 were using or developing AI; across 583 applications the most common were customer support (15.6%), credit underwriting (13.7%), sales and marketing (11.8%) and cybersecurity (10.6%). The report says these functions typically involve lower risk, structured flows and easier implementation, which reads as high readiness.
+- **Thin-file credit assessment.** The report sees AI helping assess creditworthiness from non-traditional data for "thin-file" borrowers, while entities cited sparse data as a bottleneck. High value, historically low readiness.
+- **Customer-facing GenAI.** Large potential, but the report records reluctance over data sensitivity. High value, readiness unresolved.
 
-The Account Aggregator framework shows readiness being built as shared infrastructure, outside any one lender. In coverage of a CRIF and Sahamati impact report, [CNBC-TV18](https://www.cnbctv18.com/personal-finance/account-aggregator-led-lending-touches-rs-3-82-lakh-crore-in-fy26-with-no-hit-to-loan-quality-crif-sahamati-report-20012816.htm) cites a Sahamati estimate of ₹3.82 lakh crore of AA-enabled lending across 3.68 crore loans in FY26. As of August 2026 the ecosystem had recorded over 566 million fulfilled consents. Treat the report with care: it is industry-commissioned, and I draw no causal line from AA to credit outcomes. AA is not an AI programme. It is a data-readiness story, which is the point. The FREE-AI report's first recommendation is a [financial sector data infrastructure](https://www.rbi.org.in/Scripts/PublicationReportDetails.aspx?ID=1306), because fragmented, non-standard data makes institutions spend heavy effort on collecting and cleaning before AI can use it.
+The Account Aggregator framework shows readiness being built as shared infrastructure, outside any one lender. [CNBC-TV18](https://www.cnbctv18.com/personal-finance/account-aggregator-led-lending-touches-rs-3-82-lakh-crore-in-fy26-with-no-hit-to-loan-quality-crif-sahamati-report-20012816.htm) reports a Sahamati estimate of ₹3.82 lakh crore of AA-enabled lending across 3.68 crore loans in FY26, with over 566 million fulfilled consents as of August 2026. The report is industry-commissioned, so I draw no causal line from AA to credit outcomes. AA is not an AI programme; it is a data-readiness story, which is the point. FREE-AI's first recommendation makes the same case at sector level: a [financial sector data infrastructure](https://www.rbi.org.in/Scripts/PublicationReportDetails.aspx?ID=1306).
 
 ## What is the CLAS test for going live?
 
-CLAS has four legs, each applied **per use case, not per model**. A model that is fine for one use case can fail another.
+CLAS has four legs, and one qualification that matters more: **each is judged with respect to the use case, not the model.** The same model can be right for one job and wrong for the next. Pick the model before you have written down the use case and you get a pilot that cannot be productionised.
 
-- **Cost** with respect to the use case. Does it still make sense at production volume, not pilot volume?
-- **Latency or UX** with respect to the use case. Does the response time and experience fit how this use case is actually used?
-- **Accuracy** with respect to the use case. How accurate does this particular use case need to be, and what does an error cost here?
-- **Security** with respect to the use case. Which data does it touch, and what does the regulation require to process that data in production?
+**Cost, with respect to the use case.** Not "can we afford it" but "which cost equation works here". Many use cases are served well enough by a cheaper model; a more expensive one buys accuracy you do not need at a volume you will have to pay for. Write down the least expensive model that clears the other three legs, at production volume rather than pilot volume.
 
-The first three are engineering and economics. Security is where pilots most often hit a wall, because a pilot can quietly use data that production cannot. I split it by data class.
+**Latency or UX, with respect to the use case.** Latency is a budget set by the experience, not the infrastructure. A voice AI system has to answer almost immediately; a caller who waits has stopped listening. Summarisation, or a report assembled from documents, has a different budget: a minute is fine, because nobody is waiting on it in the moment. This leg decides which model you run and how you serve it.
 
-**Public data.** Published circulars, market data, product documents. The constraint is usually reliability and provenance rather than permission, though licence terms still apply.
+**Accuracy, with respect to the use case.** How accurate a model has to be is a function of the problem, not of its benchmark. If a customer asks for their account statement and the system extracts the wrong identifier and sends them another customer's statement, that is a disclosure, an escalation and a complaint. Tagging inbound queries is different: a human is in the loop, and an error costs a correction. Treat both kinds as the same problem and you either over-engineer a suggestion tool or ship an extractor that mails the wrong document.
 
-**Private data.** Internal, confidential, but not personal: policies, pricing logic, internal reports. It is governed by the institution's own controls and contracts. The FREE-AI report flags third-party AI dependencies, where vendors and sub-contractors give an institution limited visibility.
+**Security, with respect to the use case.** Which data does this use case touch, and what does the regulation require in order to process it in production? If it uses private data or PII, and the regulator requires that processing to happen in the India geography, the question is not which model is best but which model you can deploy here, and which use cases can go to production at all. One that is not deployed as per the requirement is not a candidate.
 
-**PII.** The [DPDP Act, 2023](https://www.indiacode.nic.in/bitstream/123456789/22037/1/a2023-22.pdf) defines personal data as data about an identifiable individual. Section 8(5) requires a Data Fiduciary to take reasonable security safeguards to prevent a personal data breach, including for processing by a Data Processor on its behalf. Section 16 lets the Central Government restrict transfers of personal data to notified countries or territories, and says stricter sectoral law still applies.
+Security is also where a pilot quietly cheats, because it can run on data that production cannot. I split it by data class.
 
-That last point matters for financial services, because sector rules can be stricter. The RBI's 2018 circular on [Storage of Payment System Data](https://www.rbi.org.in/scripts/NotificationUser.aspx?Id=11244) requires system providers to store the entire payment-system data only in India. The [RBI's FAQs](https://www.rbi.org.in/commonman/english/scripts/FAQs.aspx?Id=2995) add that processing abroad is not barred, but the data must be deleted abroad and brought back to India within one business day or 24 hours, whichever is earlier. A cloud-hosted model that sees payment data is therefore a regulatory question as well as a technical one. Whether the circular applies to a given use case is a question for compliance and legal teams, not this essay. The FREE-AI report itself notes that global AI infrastructure can conflict with data localisation requirements.
+**Public data.** Published circulars, market data, product documents. The constraint is usually reliability and provenance rather than permission, though licence terms apply.
+
+**Private data.** Internal and confidential, but not personal: policies, pricing logic, internal reports. Governed by the institution's own controls and contracts, including what third-party AI vendors and sub-contractors can see.
+
+**PII.** The [DPDP Act, 2023](https://www.indiacode.nic.in/bitstream/123456789/22037/1/a2023-22.pdf) defines personal data as data about an identifiable individual. Section 8(5) requires a Data Fiduciary to take reasonable security safeguards to prevent a breach, including by a Data Processor acting on its behalf. Section 16 lets the Central Government restrict transfers to notified countries or territories, and stricter sectoral law still applies.
+
+That last point matters most in financial services, where sector rules can be stricter. The RBI's 2018 circular on [Storage of Payment System Data](https://www.rbi.org.in/scripts/NotificationUser.aspx?Id=11244) requires system providers to store the entire payment-system data only in India. Its [FAQs](https://www.rbi.org.in/commonman/english/scripts/FAQs.aspx?Id=2995) add that processing abroad is not barred, but the data must be deleted abroad and brought back within one business day or 24 hours, whichever is earlier. A model that sees payment data is therefore a deployment question before a technical one. Whether it applies to a given use case is for compliance and legal teams, not this essay. The FREE-AI report makes the same point generally: global AI infrastructure can conflict with data localisation rules.
+
+Any AI strategist in the organisation needs a view on all four legs before they can think about productionising at scale. Three of them are engineering and economics. Security is a gate.
 
 ## How do the 2x2 and CLAS fit together?
 
-The 2x2 picks where to start. CLAS decides whether the use case can go live.
+The 2x2 picks where to start. CLAS decides whether a use case can go live. Use the 2x2 early, when the list is long; run CLAS on the shortlist, before the pilot rather than after.
 
-Use the 2x2 early, when the list is long and you need to choose which three to work on. Use CLAS on the shortlist, and check it before the pilot starts, not after. If a use case clears three legs and fails Security because the data class and the processing rule do not fit, you have learned something that costs nothing now and a quarter later.
-
-It also explains the trap. A high-value, low-readiness use case can fail Security and Accuracy at the same time: data you cannot trust is often data you are not free to move.
+The trap sits where they meet: a high-value, low-readiness use case can fail Security and Accuracy at once, because data you cannot trust is often data you are not free to move.
 
 ## What should a BFSI AI team do on Monday?
 
-1. List your live and planned use cases. The FREE-AI report recommends an internal AI inventory, so this is not wasted work.
-2. Place each on the 2x2. Use evidence for readiness: can you reach the data, and can you trace where it came from?
-3. For the shortlist, write one line per CLAS leg. For Security, write the data class and the rule that governs processing it in production.
+1. List your live and planned use cases; the FREE-AI report recommends an internal AI inventory.
+2. Place each on the 2x2, using evidence for readiness: can you reach the data, and trace where it came from?
+3. For the shortlist, write one line per CLAS leg: the cheapest model that clears the other three, the latency budget, what an error costs, and the data class plus its processing rule.
 4. Move one high-value, low-readiness use case into a funded data workstream with a named owner.
 5. Say no, in writing, to the ones that land in Park.
 
-Do not read this as a guarantee. A use case that clears CLAS can still fail in production, for example if models degrade over time. In the RBI's survey, only 21% of respondents monitored for data or model drift. Clearing the test earns the right to try. It does not promise an outcome.
+Do not read this as a guarantee. A use case that clears CLAS can still fail in production, for example if models degrade over time. In the RBI's survey, only 21% of respondents monitored for data or model drift. Clearing the test earns the right to try, not an outcome.
 
 If you want more on this topic, the [AI in BFSI hub](/topics/ai-in-bfsi) collects the related pieces, and [Fintech India](/topics/fintech-india) covers the data rails such as Account Aggregator.
