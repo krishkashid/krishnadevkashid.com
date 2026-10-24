@@ -10,6 +10,6 @@ const reads = await allReads();
   <p class="muted" style="margin-top:.5rem">Five to eight links a week, each with a line on why it matters.</p>
   <div style="margin-top:1.5rem">
     {reads.length === 0 && <p class="muted">The first digest is on its way.</p>}
-    {reads.map((r) => <Entry href={`/reads/${r.data.week}`} title={r.data.title} description={r.data.description} date={r.data.pubDate} />)}
+    {reads.map((r) => <Entry level={2} href={`/reads/${r.data.week}`} title={r.data.title} description={r.data.description} date={r.data.pubDate} />)}
   </div>
 </Base>

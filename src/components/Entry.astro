@@ -1,14 +1,16 @@
 ---
 import { PILLARS, type PillarKey } from '../config';
 import { fmtDate } from '../lib/content';
-interface Props { href: string; title: string; description: string; date: Date; pillar?: PillarKey }
-const { href, title, description, date, pillar } = Astro.props;
+// level 2 on list pages, where entries sit directly under the page h1
+interface Props { href: string; title: string; description: string; date: Date; pillar?: PillarKey; level?: 2 | 3 }
+const { href, title, description, date, pillar, level = 3 } = Astro.props;
+const H = `h${level}`;
 ---
 
 <article class="entry">
   <p class="pill" style="margin:0 0 .25rem">
     <time datetime={date.toISOString()}>{fmtDate(date)}</time>{pillar && <> · {PILLARS[pillar].title}</>}
   </p>
-  <h3><a href={href}>{title}</a></h3>
+  <H><a href={href}>{title}</a></H>
   <p>{description}</p>
 </article>

@@ -9,6 +9,6 @@ const posts = await allNotes();
   <h1 class="h1">Notes</h1>
   <div style="margin-top:1.5rem">
     {posts.length === 0 && <p class="muted">Nothing here yet.</p>}
-    {posts.map((p) => <Entry href={`/notes/${p.id}`} title={p.data.title} description={p.data.description} date={p.data.pubDate} pillar={p.data.pillar} />)}
+    {posts.map((p) => <Entry level={2} href={`/notes/${p.id}`} title={p.data.title} description={p.data.description} date={p.data.pubDate} pillar={p.data.pillar} />)}
   </div>
 </Base>
