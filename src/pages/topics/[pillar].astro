@@ -18,6 +18,6 @@ const posts = [...(await allEssays()), ...(await allNotes())]
   <p class="muted" style="margin-top:.5rem">{info.blurb}</p>
   <div style="margin-top:1.5rem">
     {posts.length === 0 && <p class="muted">Writing on this topic is coming.</p>}
-    {posts.map((p) => <Entry href={`/${p.collection}/${p.id}`} title={p.data.title} description={p.data.description} date={p.data.pubDate} />)}
+    {posts.map((p) => <Entry level={2} href={`/${p.collection}/${p.id}`} title={p.data.title} description={p.data.description} date={p.data.pubDate} />)}
   </div>
 </Base>
